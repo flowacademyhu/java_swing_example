@@ -5,6 +5,11 @@ import java.awt.Color;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionAdapter;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -61,6 +66,23 @@ public class Window extends JFrame {
     textField.setBackground(Color.MAGENTA);
     textField.setForeground(Color.WHITE);
 
+    textField.addKeyListener(new KeyListener() {
+      @Override
+      public void keyTyped(KeyEvent e) {
+        System.out.println("Typed: " + e.getKeyChar());
+      }
+
+      @Override
+      public void keyPressed(KeyEvent e) {
+        System.out.println("Pressed: " + e.getKeyChar());
+      }
+
+      @Override
+      public void keyReleased(KeyEvent e) {
+        System.out.println("Released (the Krakhen): " + e.getKeyChar());
+      }
+    });
+
     lower.add(textField);
 
     JTextArea textArea = new JTextArea("Hello darling ;)");
@@ -97,6 +119,17 @@ public class Window extends JFrame {
 
     button.addActionListener((ActionEvent e) -> {
       JOptionPane.showMessageDialog(this,"VIRUS!!!!!");
+    });
+
+//    button.addMouseListener(new MouseListener() {
+//    });
+
+    button.addMouseMotionListener(new MouseMotionAdapter() {
+      @Override
+      public void mouseMoved(MouseEvent e) {
+        System.out.printf("x: %d, y: %d\n", e.getX(), e.getY());
+        super.mouseMoved(e);
+      }
     });
 
     upper.add(button);
